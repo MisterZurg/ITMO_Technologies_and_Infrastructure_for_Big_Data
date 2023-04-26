@@ -148,11 +148,11 @@ There will be smth like:
 > Password: <your_password>
 > ```
 
-#### 4.2
+#### 4.2 Connect through FortiVPN
 1. Fill the data
 2. Check the connectivity
 ```shell
-ping 10.32.7.101
+(base) misterzurg@MacBook-Pro-Denis ~ % ping 10.32.7.101
 PING 10.32.7.101 (10.32.7.101): 56 data bytes
 64 bytes from 10.32.7.101: icmp_seq=0 ttl=61 time=28.850 ms
 64 bytes from 10.32.7.101: icmp_seq=1 ttl=61 time=42.152 ms
@@ -161,7 +161,7 @@ PING 10.32.7.101 (10.32.7.101): 56 data bytes
 
 ### Connecting to Cluster
 ```shell
-ssh <your_login>@gateway.st
+(base) misterzurg@MacBook-Pro-Denis ~ % ssh <your_login>@gateway.st
 password >>> <your_password>
 ```
 
@@ -269,7 +269,7 @@ node03.st:32074
 [I 17:41:00.537 NotebookApp] 302 GET / (10.128.103.192) 0.830000ms
 [I 17:41:00.631 NotebookApp] 302 GET /tree? (10.128.103.192) 1.030000ms
 ```
-> ?token=*COPY_THAT_PART*
+> ?token=***COPY_THAT_PART***
 
 Put that token into `node03.st:32074` input field
 
@@ -277,7 +277,7 @@ Put that token into `node03.st:32074` input field
 ```shell
 [<your_login>@gateway ~]$ kubectl delete pod jupyter-spark-7c5b4455cc-fv7dr
 ```
-> When you delete pod and token is expired and stuff that you store note in
+> When you delete pod and token is expired and stuff that you store **NOT in**
 > ```shell
 >   /
 >   | - 📁 shared-data
