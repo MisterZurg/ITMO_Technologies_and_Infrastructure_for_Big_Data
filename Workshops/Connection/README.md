@@ -187,7 +187,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: jupyter-spark-svc
-  namespace: <your_login> # Your namespave stuff
+  namespace: <your_login> # Your namespace stuff
 spec:
   type: NodePort
   ports:
@@ -277,7 +277,7 @@ Put that token into `node03.st:32074` input field
 ```shell
 [<your_login>@gateway ~]$ kubectl delete pod jupyter-spark-7c5b4455cc-fv7dr
 ```
-> When you delete pod and token is expired and stuff that you store **NOT in**
+> When you delete pod, token is expired and stuff that you store **NOT in**
 > ```shell
 >   /
 >   | - 📁 shared-data

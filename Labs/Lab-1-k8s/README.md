@@ -281,7 +281,6 @@ lab0-jupyter-79b957db4b-zsd4p    1/1     Running   0          6s
 ## 6. (1 point) Save in file lab0-ls-lah.sh the command to list files in the Jupyter container path /home/jovyan/.jupyter.
 
 
-# lab0-ls-lah.sh
 > ```shell
 > # lab0-ls-lah.sh
 > kubectl exec <POD_NAME> -- ls -a /home/jovyan/.jupyter
