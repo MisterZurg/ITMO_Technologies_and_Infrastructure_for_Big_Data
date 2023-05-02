@@ -9,7 +9,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      jupyter: lab0"
+      jupyter: lab0
   template:
     metadata:
       labels:
