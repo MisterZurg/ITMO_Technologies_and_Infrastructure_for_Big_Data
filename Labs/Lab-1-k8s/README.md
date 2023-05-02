@@ -63,7 +63,7 @@ Requirements:
 
 ```shell
 # Create a Deployment — that provides declarative updates for Pods and ReplicaSets.
-kubectl create -f lab0-jupyter.yaml
+kubectl create -f lab0-jupyter-deployment.yaml
 # Create a Service — method for exposing a network application that is running as one or more Pods in your cluster.
 kubectl create -f lab0-jupyter-service.yaml
 ```
@@ -189,8 +189,11 @@ spec:
   - `c.NotebookApp.quit_button = False`
 
 ### Jupyter’s ConfigMap
-
 > `ConfigMap` — an object to store the data in key-value pairs.
+```shell
+# Create a ConfigMap 
+kubectl create -f lab0-jupyter-cm.yaml
+```
 
 ```yaml
 apiVersion: v1
@@ -228,11 +231,12 @@ spec:
       labels:
         jupyter: lab0
     spec:    
-      ports:
-        - containerPort: 8282
       containers:
       - name: jupyter
         image: node03.st:5000/pyspark-hdfs-jupyter:<your_login>
+        ports:
+        - containerPort: 8282
+        command: ["start-notebook.sh"]  # Without CrashBackOff
         args: ["--NotebookApp.token='<your_password>'", "--NotebookApp.port=8282"]
         resources:
           requests:
