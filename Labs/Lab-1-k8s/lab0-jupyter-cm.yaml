@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lab0-jupyter-cm
+  namespace: <your_login> # TODO : HARDCODE
+
+data:
+  jupyter_notebook_config.py: |
+    c.NotebookApp.trust_xheaders = True
+    c.NotebookApp.quit_button = False

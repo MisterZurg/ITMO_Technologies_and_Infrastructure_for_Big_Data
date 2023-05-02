@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lab0-jupyter
+  namespace: <your_login>     # TODO : HARDCODE
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      jupyter: lab0"
+  template:
+    metadata:
+      labels:
+        jupyter: lab0
+    spec:
+      containers:
+        - name: jupyter
+          image: node03.st:5000/pyspark-hdfs-jupyter:<your_login>                     # TODO : HARDCODE
+          ports:
+            - containerPort: 8282
+          command: ["start-notebook.sh"]  # Without CrashBackOff
+          args: ["--NotebookApp.token='<your_password>'", "--NotebookApp.port=8282"]  # TODO : HARDCODE
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "1"
+            limits:
+              memory: "2Gi"
+              cpu: "1"
+
+          volumeMounts:
+            - name: config-volume
+              mountPath: /home/jovyan/.jupyter
+              readOnly: true
+      volumes:
+        - name: config-volume
+          configMap:
+            name: lab0-jupyter-cm
+            items:
+              - key: "jupyter_notebook_config.py"
+                path: "jupyter_notebook_config.py"

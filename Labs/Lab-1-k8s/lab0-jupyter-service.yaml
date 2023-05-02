@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lab0-jupyter-service
+  namespace: <your_login>     # TODO : HARDCODE
+
+spec:
+  type: NodePort
+  selector:
+    jupyter: lab0-jupyter
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8282
