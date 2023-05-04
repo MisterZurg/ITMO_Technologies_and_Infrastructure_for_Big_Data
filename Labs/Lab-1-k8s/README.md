@@ -1,8 +1,14 @@
 # Lab 1 — Kubernetes
 
+> You could follow the guide to understand what you're doing
+> 
+> OR
+> 
+> Go to [Short what to do](#short-what-to-do)
+
 ## Connect to Cluster
 <details>
-  <summary>Collapse</summary>
+  <summary>ℹ️ Collapse</summary>
 
 1. Start and connect VPN
 2. Check the connectivity
@@ -60,6 +66,11 @@ Requirements:
 - e. Service name: `lab0-jupyter-service`
 - f. Service has to forward requests only to this deployment’s pod. Ports number for traffic forwarding - 1.
 - g. Service type - `NodePort`
+
+> Your Jupyter image is 
+> ```
+> node03.st:5000/pyspark-hdfs-jupyter:<your_login>
+> ```
 
 ```shell
 # Create a Deployment — that provides declarative updates for Pods and ReplicaSets.
@@ -185,7 +196,7 @@ spec:
 - a. CM name: `lab0-jupyter-cm`
 - b. CM has to contain a  file-like key. Key - `jupyter_notebook_config.py`
 - c. Content for the `jupyter_notebook_config.py` key (2 rows): 
-  - `NotebookApp.trust_xheaders = True`
+  - `с.NotebookApp.trust_xheaders = True`
   - `c.NotebookApp.quit_button = False`
 
 ### Jupyter’s ConfigMap
@@ -303,6 +314,28 @@ metadata:
   namespace: <your_login>
 ```
 
+## Cheking everything is ok
+1. Get your external port
+```shell
+[dzaharov-369864@gateway ~]$ kubectl get service
+NAME                   TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)                         AGE
+jupyter-spark-svc      NodePort   10.129.154.22    <none>        8888:32074/TCP,4040:31385/TCP   7d17h
+lab0-jupyter-service   NodePort   10.129.187.168   <none>        80:30960/TCP                    42h
+```
+> `lab0-jupyter-service` ... 80:**30960**
+
+2. Go to `http://node03.st:<external_port>`
+> http://node03.st:**30960**
+
+3. On login page as a token input `<your_password>` the one that you hard code!
+
+4. There will be smth like
+>```shell
+> / 📁
+>   | - 📁 nltk-data
+>   | - 📁 work
+> ```
+
 ## Short what to do
 ### Create 3 or 1 YAMLS's and 1 shell
 ```shell
@@ -328,13 +361,7 @@ metadata:
 [<your_login>@gateway ~]$ kubectl apply -f <filename>.yaml
 ```
 
-> You're Genius
+> You're Genius 🗿
 
-## Extra info:
-
-> Your Jupyter image is 
-> ```
-> node03.st:5000/pyspark-hdfs-jupyter:<your_login>
-> ```
 
 [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
