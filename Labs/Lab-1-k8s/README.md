@@ -100,7 +100,7 @@ spec:
 
 ### Jupyter’s Deployment
 ```yaml
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: lab0-jupyter
@@ -174,7 +174,7 @@ spec:
 
 ### Jupyter’s Deployment
 ```yaml
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: lab0-jupyter
@@ -248,7 +248,7 @@ kubectl create -f lab0-jupyter-cm.yaml
 
 ### Jupyter’s Deployment
 ```yaml
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: lab0-jupyter
@@ -329,7 +329,6 @@ lab0-jupyter-79b957db4b-zsd4p    1/1     Running   0          6s
 
 So we have to add in each `*.yaml`
 ```yaml
-apiVersion: v1
 kind: <Deployment | Service | ConfigMap>
 metadata:
   namespace: <your_login>
@@ -346,7 +345,7 @@ lab0-jupyter-service   NodePort   10.129.187.168   <none>        80:30960/TCP   
 > `lab0-jupyter-service` ... 80:**30960**
 
 2. Go to `http://node03.st:<external_port>`
-> http://node03.st:**30960**
+> http://node03.st:30960
 
 3. On login page as a token input `<your_password>` the one that you hard code!
 
