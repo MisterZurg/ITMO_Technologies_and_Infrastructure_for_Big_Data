@@ -73,12 +73,18 @@ Requirements:
 > ```
 
 ```shell
-# Create a Deployment — that provides declarative updates for Pods and ReplicaSets.
-kubectl create -f lab0-jupyter-deployment.yaml
-# Create a Service — method for exposing a network application that is running as one or more Pods in your cluster.
-kubectl create -f lab0-jupyter-service.yaml
-```
+# Create file where you store the description of your Deployment
+[<your_login>@gateway ~]$ vim lab0-jupyter-deployment.yaml
+~                                                                               
+~ 
+:wq
 
+# Create file where you store the description of your Service
+[<your_login>@gateway ~]$ vim lab0-jupyter-service.yaml
+~                                                                               
+~ 
+:wq
+```
 ### Jupyter’s Service
 ```yaml
 apiVersion: v1
@@ -121,6 +127,13 @@ spec:
           limits:
             memory: "2Gi"
             cpu: "1"
+```
+
+```shell
+# Create a Deployment — that provides declarative updates for Pods and ReplicaSets.
+kubectl create -f lab0-jupyter-deployment.yaml
+# Create a Service — method for exposing a network application that is running as one or more Pods in your cluster.
+kubectl create -f lab0-jupyter-service.yaml
 ```
 
 ## 2. (2 points) Modify previous Deployment and Service to face following conditions:
@@ -202,8 +215,11 @@ spec:
 ### Jupyter’s ConfigMap
 > `ConfigMap` — an object to store the data in key-value pairs.
 ```shell
-# Create a ConfigMap 
-kubectl create -f lab0-jupyter-cm.yaml
+# Create file where you store the description of your ConfigMap
+[<your_login>@gateway ~]$ vim lab0-jupyter-cm.yaml
+~                                                                               
+~ 
+:wq
 ```
 
 ```yaml
@@ -218,6 +234,11 @@ data:
   jupyter_notebook_config.py: |
     c.NotebookApp.trust_xheaders = True
     c.NotebookApp.quit_button = False
+```
+
+```shell
+# Create a ConfigMap 
+kubectl create -f lab0-jupyter-cm.yaml
 ```
 
 ## 4. (3 points) Mount jupyter_notebook_config.py (only this file) from your CM into the Jupyter pod:
@@ -299,7 +320,7 @@ lab0-jupyter-79b957db4b-zsd4p    1/1     Running   0          6s
 
 ```shell
 # lab0-ls-lah.sh
-kubectl exec lab0-jupyter-79b957db4b-zsd4p -- ls -a /home/jovyan/.jupyter
+[<your_login>@gateway ~]$ kubectl exec lab0-jupyter-79b957db4b-zsd4p -- ls -a /home/jovyan/.jupyter
 ```
 
 > **Attention all Fortnite gamers** 
@@ -317,7 +338,7 @@ metadata:
 ## Cheking everything is ok
 1. Get your external port
 ```shell
-[dzaharov-369864@gateway ~]$ kubectl get service
+[<your_login>@gateway ~]$ kubectl get service
 NAME                   TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)                         AGE
 jupyter-spark-svc      NodePort   10.129.154.22    <none>        8888:32074/TCP,4040:31385/TCP   7d17h
 lab0-jupyter-service   NodePort   10.129.187.168   <none>        80:30960/TCP                    42h
@@ -345,12 +366,6 @@ lab0-jupyter-service   NodePort   10.129.187.168   <none>        80:30960/TCP   
 > Update all
 > `<put what you need here>` and `TODO HARDCODE` stuff
 
-### Logs
-```shell
-[<your_login>@gateway ~]$ kubectl get pods
-[<your_login>@gateway ~]$ kubectl logs <POD_NAME> --timestamps >> lab0-jupyter.log
-```
-
 ### Check that they appeared
 ```shell
 [<your_login>@gateway ~]$ ls
@@ -359,6 +374,12 @@ lab0-jupyter-service   NodePort   10.129.187.168   <none>        80:30960/TCP   
 ### Apply them
 ```shell
 [<your_login>@gateway ~]$ kubectl apply -f <filename>.yaml
+```
+
+### Logs
+```shell
+[<your_login>@gateway ~]$ kubectl get pods
+[<your_login>@gateway ~]$ kubectl logs <POD_NAME> --timestamps >> lab0-jupyter.log
 ```
 
 > You're Genius 🗿
