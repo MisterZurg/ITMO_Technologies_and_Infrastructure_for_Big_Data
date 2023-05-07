@@ -32,7 +32,7 @@ spec:
 
           volumeMounts:
             - name: config-volume
-              mountPath: /home/jovyan/.jupyter
+              mountPath: /home/jovyan/.jupyter/jupyter_notebook_config.py
               readOnly: true
       volumes:
         - name: config-volume

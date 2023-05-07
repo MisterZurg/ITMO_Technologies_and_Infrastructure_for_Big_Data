@@ -1,5 +1,11 @@
 # Lab 1 — Kubernetes
 
+> <picture>
+>   <source media="(prefers-color-scheme: d)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/tip.svg">
+>   <img alt="Tip" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/tip.svg">
+> </picture><br>
+>
+> 
 > You could follow the guide to understand what you're doing
 > 
 > OR
@@ -7,39 +13,44 @@
 > Go to [Short what to do](#short-what-to-do)
 
 ## Connect to Cluster
-<details>
-  <summary>ℹ️ Collapse</summary>
+> <picture>
+>   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/info.svg">
+>   <img alt="Info" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/info.svg">
+> </picture><br>
+> <details>
+>  <summary>Collapse</summary>
+>
+> 1. Start and connect VPN
+> 2. Check the connectivity
+> ```shell
+>(base) misterzurg@MacBook-Pro-Denis ~ % ping 10.32.7.101
+> PING 10.32.7.101 (10.32.7.101): 56 data bytes
+> 64 bytes from 10.32.7.101: icmp_seq=0 ttl=61 time=30.223 ms
+> ```
+> 3. Connect to Cluster
+> ```shell
+>(base) misterzurg@MacBook-Pro-Denis ~ % ssh <your_login>@gateway.st
+> password >>> <your_password>
+> ```
+> 
+> 4. Get the external port
+> ```shell
+> [<your_login>@gateway ~]$ kubectl get svc
+> NAME                TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)                         AGE
+> jupyter-spark-svc   NodePort   10.129.154.22   <none>        8888:32074/TCP,4040:31385/TCP   5m25s
+> ```
+> 
+> 5. Type in browsers URL
+> ```
+> node03.st:32074
+> ```
+> 
+> 6. Get token
+> ```shell
+> [<your_login>@gateway ~]$ kubectl logs jupyter-spark-7c5b4455cc-fv7dr 
+> ```
+> </details>
 
-1. Start and connect VPN
-2. Check the connectivity
-```shell
-(base) misterzurg@MacBook-Pro-Denis ~ % ping 10.32.7.101
-PING 10.32.7.101 (10.32.7.101): 56 data bytes
-64 bytes from 10.32.7.101: icmp_seq=0 ttl=61 time=30.223 ms
-```
-3. Connect to Cluster
-```shell
-(base) misterzurg@MacBook-Pro-Denis ~ % ssh <your_login>@gateway.st
-password >>> <your_password>
-```
-
-4. Get the external port
-```shell
-[<your_login>@gateway ~]$ kubectl get svc
-NAME                TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)                         AGE
-jupyter-spark-svc   NodePort   10.129.154.22   <none>        8888:32074/TCP,4040:31385/TCP   5m25s
-```
-
-5. Type in browsers URL
-```
-node03.st:32074
-```
-
-6. Get token
-```shell
-[<your_login>@gateway ~]$ kubectl logs jupyter-spark-7c5b4455cc-fv7dr 
-```
-</details>
 
 ## 1. (1 point) Create Jupyter’s Deployment and Service.
 Requirements:
@@ -67,6 +78,14 @@ Requirements:
 - f. Service has to forward requests only to this deployment’s pod. Ports number for traffic forwarding - 1.
 - g. Service type - `NodePort`
 
+
+> <picture>
+>   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/issue.svg">
+>   <img alt="Issue" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/issue.svg">
+> </picture><br>
+>
+> Params for point f in the next subtask
+> 
 > Your Jupyter image is 
 > ```
 > node03.st:5000/pyspark-hdfs-jupyter:<your_login>
@@ -96,6 +115,7 @@ spec:
   type: NodePort  # Kubernetes control plane allocates a port from a range specified by --service-node-port-range flag (default: 30000-32767)
   selector:       # The set of Pods targeted by a Service
     jupyter: lab0
+  ports:          # See next point
 ```
 
 ### Jupyter’s Deployment
@@ -280,7 +300,7 @@ spec:
         # Mount the config map
         volumeMounts:
           - name: config-volume
-            mountPath: /home/jovyan/.jupyter
+            mountPath: /home/jovyan/.jupyter/jupyter_notebook_config.py
             readOnly: true
       volumes:
         - name: config-volume
@@ -323,8 +343,13 @@ lab0-jupyter-79b957db4b-zsd4p    1/1     Running   0          6s
 [<your_login>@gateway ~]$ kubectl exec lab0-jupyter-79b957db4b-zsd4p -- ls -a /home/jovyan/.jupyter
 ```
 
-> **Attention all Fortnite gamers** 
+> <picture>
+>   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/warning.svg">
+>   <img alt="Warning" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/warning.svg">
+> </picture><br>
 > 
+> **Attention all Fortnite gamers** 
+>
 > pods, deployments, services, etc **HAVE TO BE PRESENTED** in your namespace.
 
 So we have to add in each `*.yaml`
@@ -381,6 +406,11 @@ lab0-jupyter-service   NodePort   10.129.187.168   <none>        80:30960/TCP   
 [<your_login>@gateway ~]$ kubectl logs <POD_NAME> --timestamps >> lab0-jupyter.log
 ```
 
+> <picture>
+>   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/success.svg">
+>   <img alt="Success" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/success.svg">
+> </picture><br>
+>
 > You're Genius 🗿
 
 
