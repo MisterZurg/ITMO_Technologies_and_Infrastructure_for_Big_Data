@@ -263,7 +263,7 @@ kubectl create -f lab0-jupyter-cm.yaml
 
 ## 4. (3 points) Mount jupyter_notebook_config.py (only this file) from your CM into the Jupyter pod:
 - а. Mount has to be completed from the CM.
-- b. Mount path - `/home/jovyan/.jupyter/jupyter_notebook_config.py`
+- b. [Mount path](https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath) - `/home/jovyan/.jupyter/jupyter_notebook_config.py`
 - c. Mount has to be read only.
 
 ### Jupyter’s Deployment
@@ -301,6 +301,7 @@ spec:
         volumeMounts:
           - name: config-volume
             mountPath: /home/jovyan/.jupyter/jupyter_notebook_config.py
+            subPath: "jupyter_notebook_config.py"
             readOnly: true
       volumes:
         - name: config-volume

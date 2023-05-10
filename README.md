@@ -19,6 +19,7 @@ Technologies and Infrastructure for Big Data
 
 ## Labs
 1. [K8s](Labs/Lab-1-k8s/README.md)
-2. 
+2. [PySpark]()
+3. [ClickHouse]()
  
 ## CourseWork
