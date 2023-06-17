@@ -535,3 +535,10 @@ def task_6(df: "pyspark.sql.dataframe.DataFrame",
     
     return modified_df
 ```
+
+> <picture>
+>   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/success.svg">
+>   <img alt="Success" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/success.svg">
+> </picture><br>
+>
+> You're Genius 🗿
