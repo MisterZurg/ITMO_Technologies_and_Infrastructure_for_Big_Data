@@ -135,11 +135,15 @@ The most common formats are TXT, CSV, BINARY, JSON, PARQUET
 - Schema evolution
 - Compatibility
 
-TXT: Plain text file that contains unformatted text. Great choice for storing and sharing simple, unformatted information, such as notes, lists, or code snippets.
-CSV: Good option for compatibility, spreadsheet processing and human readable data. The data must be flat. It is not efficient and cannot handle nested data. There may be issues with the separator which can lead to data quality issues. Use this format for exploratory analysis, POCs or small data sets.
-BINARY: Performance, small size. Not human readable. Advantages in terms of speed of access.
-JSON: Heavily used in APIs. Nested format. It is widely adopted and human readable but it can be difficult to read if there are lots of nested fields. Great for small data sets, landing data or API integration. If possible convert to more efficient format before processing large amounts of data.
-Parquet: Columnar storage. It has schema support. It works very well with Hive and Spark as a way to store columnar data in deep storage that is queried using SQL. Because it stores data in columns, query engines will only read files that have the selected columns and not the entire data set as opposed to Avro. Use it as a reporting layer.
+**TXT:** Plain text file that contains unformatted text. Great choice for storing and sharing simple, unformatted information, such as notes, lists, or code snippets.
+
+**CSV:** Good option for compatibility, spreadsheet processing and human readable data. The data must be flat. It is not efficient and cannot handle nested data. There may be issues with the separator which can lead to data quality issues. Use this format for exploratory analysis, POCs or small data sets.
+
+**BINARY:** Performance, small size. Not human readable. Advantages in terms of speed of access.
+
+**JSON:** Heavily used in APIs. Nested format. It is widely adopted and human readable but it can be difficult to read if there are lots of nested fields. Great for small data sets, landing data or API integration. If possible convert to more efficient format before processing large amounts of data.
+
+**Parquet:** Columnar storage. It has schema support. It works very well with Hive and Spark as a way to store columnar data in deep storage that is queried using SQL. Because it stores data in columns, query engines will only read files that have the selected columns and not the entire data set as opposed to Avro. Use it as a reporting layer.
 
 
 ## Apache Spark

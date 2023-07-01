@@ -1,4 +1,4 @@
-Here are my Jupyter Notebook labs from ITMO First semester
+Here are my Jupyter Notebook labs from ITMO Second semester
 
 # Discipline
 Technologies and Infrastructure for Big Data
@@ -12,7 +12,7 @@ Technologies and Infrastructure for Big Data
 
 ## Performed by
 - Me and
-- TBA
+- Michael Grigoriev [@Dormant512](https://github.com/Dormant512)
 
 ## WorkShops
 - [Connecting to Cluster](Workshops/Connection/README.md)
@@ -23,3 +23,7 @@ Technologies and Infrastructure for Big Data
 3. [ClickHouse](Labs/Lab-3-ClickHouse/README.md)
  
 ## CourseWork
+> Automating anime image collection from several resources for future model training.
+
+## Seminar Topic
+Mem~~e~~cached — general-purpose distributed memory-caching system.

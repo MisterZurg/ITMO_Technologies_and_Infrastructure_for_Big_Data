@@ -613,3 +613,30 @@ DROP TABLE <YOUR_LOGIN>.distr_transaction_view_2 ON CLUSTER kube_clickhouse_clus
 > ```
 > sudo openfortivpn fgvpn.onti.actcognitive.org:443 -u <YOUR LOGIN> -p <YOUR_PASSWORD> --trusted-cert 7585cc7b3c19fcb8d24b2a33c98638ab799c27f908d8c7b4725c7bf2d4440313 --set-routes true
 > ```
+
+
+> <picture>
+>   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/issue.svg">
+>   <img alt="Issue" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/issue.svg">
+> </picture><br>
+>
+> Не критичные замечания:
+> important - это по сути флаг `0`/`1`. Для него хватилось бы и `Int8`/`UInt8` (вместо `Int64`).
+> 
+> Критичные замечания.
+> 1. MV "смотрит" на `distributed` таблицу. Такая MV не будет работать. Тут она "сработала" только из-за ключа `POPULATE` (т.е. был выполнен запрос сразу после создания MV). Если бы в таблицу продолжали поступать данные - MV их уже не увидела бы.
+> 2. MV, в которых есть `JOIN`, триггерится только на левую часть. Т.е. если данных поступят в правую часть - они не "подхватятся". В нашем случае это не страшно, т.к. у имеем джоин таблицы самой на себя. Но, мы делаем inner join, из-за чего mv может давать неверный результат.
+> 
+> Пример - поступили следующие записи:
+> ```
+> user_id_in - user_id_out - amount
+> 1234         5678          100500
+> 5678         6543          17777
+> ```
+> 
+> Однако созданный mv сохранит только 1 строку:
+> ```
+> user_id - amount_in - amount_out 
+> 678      17777       100500
+> ```
+> 3. AggregatingMT работает с функциями `*State`, а не простыми агрегационными функциями. Например, вместо `count(...)` и `sum(...)` следовало использовать `countState(...)`, `sumState(...)`.
